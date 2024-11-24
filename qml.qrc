@@ -2,6 +2,10 @@
     <qresource prefix="/">
         <file>qml/StyleSettings/qmldir</file>
         <file>qml/StyleSettings/StyleSettings.qml</file>
-        <file>qml/main.qml</file>
+        <file>qml/Application.qml</file>
+        <file>qml/MainFrame.qml</file>
+        <file>qml/Templates/CustomInput.qml</file>
+        <file>qml/Templates/qmldir</file>
+        <file>qml/Templates/MyButton.qml</file>
     </qresource>
 </RCC>

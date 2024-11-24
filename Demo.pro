@@ -4,7 +4,9 @@ QT += gui
 QT += qml quick
 CONFIG += C++17
 SOURCES += \
-        src/main.cpp
+        src/AppEngine.cpp \
+        src/main.cpp \
+        Libs/eigen-3.4.0/Eigen/Dense
 
 RESOURCES += \
     qml.qrc
@@ -22,8 +24,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DEFINES += QT_QML_DEBUG_NO_WARNING
 
-QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/Demo.exe
+# QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/Demo.exe
 
 DISTFILES += \
-    qml/StyleSettings/StyleSettings.qml \
-    qml/main.qml
+    qml/Application.qml \
+    qml/MainFrame.qml \
+    qml/StyleSettings/StyleSettings.qml
+
+HEADERS += \
+    src/AppEngine.h
