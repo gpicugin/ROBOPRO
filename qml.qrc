@@ -7,5 +7,8 @@
         <file>qml/Templates/CustomInput.qml</file>
         <file>qml/Templates/qmldir</file>
         <file>qml/Templates/MyButton.qml</file>
+        <file>res/icon.jpg</file>
+        <file>res/icon.png</file>
+        <file>qml/Templates/CustomField.qml</file>
     </qresource>
 </RCC>

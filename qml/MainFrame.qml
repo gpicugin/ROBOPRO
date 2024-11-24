@@ -55,7 +55,7 @@ GridLayout {
             let vector = []
             for (let i = 0; i < _repeater1.count; i++)
             {
-                vector.push(parseInt(_repeater1.itemAt(i).text))
+                vector.push(parseFloat(_repeater1.itemAt(i).text))
             }
 
             let result = []
@@ -71,12 +71,12 @@ GridLayout {
             target: _repeater1
             function onValidatedRepeater()
             {
-                validateAll()
+                _myButton.validateAll()
             }
         }
 
         Component.onCompleted: {
-            validateAll()
+            _myButton.validateAll()
         }
 
         function validateAll()
@@ -102,7 +102,7 @@ GridLayout {
     Repeater {
         id: _repeater2
         model: 3
-        CustomInput
+        CustomField
         {
             Layout.margins: margins
             Layout.fillHeight: true

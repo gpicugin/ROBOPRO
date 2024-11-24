@@ -7,21 +7,21 @@ import  "../../qml/StyleSettings"
 Button {
     id: _button
 
-    text: "Calculate!"
+    text: "Calculate"
     contentItem: Text {
         anchors.centerIn: parent
         text: _button.text
         color: Style.textColor
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.pointSize: parent.width * 0.03
+        font.pointSize: parent.width * Style.fontCoef
     }
 
     background: Rectangle {
         id: _buttonBack
-        border.color: Style.borderColor
+        color: _button.down ? Style.controlsDownColor : Style.buttonColor
         border.width: Style.borderWidth
         radius: Style.controlRadius
-        color: _button.enabled ? _button.down ? Style.controlsDownColor : Style.controlsColor : Style.controlsLockColor
+        border.color: _button.enabled ? _button.down ? Style.controlsDownColor : Style.buttonColor : Style.errorColor
     }
 }

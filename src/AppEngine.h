@@ -3,8 +3,6 @@
 #include <QObject>
 #include <Libs/eigen-3.4.0/Eigen/Dense>
 
-using namespace Eigen;
-
 class AppEngine : public QObject
 {
     Q_OBJECT
@@ -12,7 +10,7 @@ public:
     explicit AppEngine(QObject *parent = nullptr);
 
 public slots:
-    QVector<double> calculate(QVector<double> thetas);
+    QVector<double> calculate(const QVector<double>& thetas);
 
 private:
     QVector<double> a_arr;
@@ -21,8 +19,8 @@ private:
     QVector<double> theta_arr;
 
     double degreesToRadians(double degrees);
-    double round(double value);
-    Matrix4d getTransformationMatrix(int index);
+    double roundFourSign(double value) const;
+    Eigen::Matrix4d getTransformationMatrix(int index) const;
 
 
 signals:

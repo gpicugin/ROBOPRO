@@ -3,7 +3,6 @@ import  "../../qml/StyleSettings"
 
 Rectangle {
     id: _customInput
-    border.color: Style.borderColor
     border.width: Style.borderWidth
     color: Style.controlsColor
     radius: Style.controlRadius
@@ -21,7 +20,9 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         color: Style.textColor
-        font.pointSize: _customInput.width * 0.05
+        font.pointSize: _customInput.width * Style.fontCoef
+
+        maximumLength: 7
 
         onActiveFocusChanged:
         {
@@ -34,20 +35,44 @@ Rectangle {
             let isValid = isValidNumber(_input.text)
             if (!isValid)
             {
-                _customInput.color = Style.errorColor
+                _customInput.border.color = Style.errorColor
                 _input.clear()
-                _input.text = "#ivalid_input"
+                _input.text = "invalid"
             }
             else
             {
-                _customInput.color = Style.controlsColor
+                _customInput.border.color = Style.controlsColor
+            }
+            validatedInput(isValid)
+        }
+
+        Component.onCompleted: {
+            let isValid = isValidNumber(_input.text)
+            if (!isValid)
+            {
+                _customInput.border.color = Style.errorColor
+            }
+            else
+            {
+                _customInput.border.color = Style.controlsColor
             }
             validatedInput(isValid)
         }
 
         function isValidNumber(input)
         {
-            return /^[+-]?\d+$/.test(input);
+            let isCorrectStr = /^[-]?\d+(\.\d+)?$/.test(input);
+            if(!isCorrectStr)
+                return false
+
+            let num = parseFloat(input)
+            let isCorrectNum = true
+
+            if(num > 180 || num < -180)
+                isCorrectNum = false
+            if(!isCorrectNum)
+                return false
+            return true
         }        
     }
 }

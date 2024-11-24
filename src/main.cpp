@@ -1,12 +1,13 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QIcon>
 #include "AppEngine.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-
+    app.setWindowIcon(QIcon(":/res/icon.png"));
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/Application.qml"));
     QObject::connect(
