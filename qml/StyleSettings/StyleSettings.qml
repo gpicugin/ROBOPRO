@@ -6,7 +6,9 @@ Item {
     id: _style
     property color  backgroundColor:    "#1c2739";
     property color  controlsColor:      "white";
-    property color  controlsDownColor:  "gray";
+    property color  controlsDownColor:  "lightslategray";
+    property color  controlsLockColor:  "indigo";
+
 
     property color  borderColor:        "black";
     property color  textColor:          "black";

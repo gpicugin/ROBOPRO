@@ -8,8 +8,6 @@ Button {
     id: _button
 
     text: "Calculate!"
-    property bool isActive: false
-
     contentItem: Text {
         anchors.centerIn: parent
         text: _button.text
@@ -24,15 +22,6 @@ Button {
         border.color: Style.borderColor
         border.width: Style.borderWidth
         radius: Style.controlRadius
-        color: _button.down ? Style.controlsDownColor : Style.controlsColor
-    }
-
-    Connections {
-        target: CustomInput
-        function onSendValidity(isValid)
-        {
-            isActive = isValid
-            _buttonBack.color = isActive ? Style.controlsDownColor : Style.controlsColor
-        }
+        color: _button.enabled ? _button.down ? Style.controlsDownColor : Style.controlsColor : Style.controlsLockColor
     }
 }

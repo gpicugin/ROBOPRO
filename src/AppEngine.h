@@ -21,6 +21,7 @@ private:
     QVector<double> theta_arr;
 
     double degreesToRadians(double degrees);
+    double round(double value);
     Matrix4d getTransformationMatrix(int index);
 
 

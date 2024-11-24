@@ -11,9 +11,10 @@ GridLayout {
     property double margins: _greed.width * 0.01
     property double inputWidth: _greed.width * 0.3
     property double heigth: _greed.height * 0.15
+    property bool isValidAllInput: true
 
-    property var arr: ["X", "Y", "Z"]
-    property var input: ["15", "-50", "-60", "95", "50", "0"]
+    readonly property var arr: ["X", "Y", "Z"]
+    readonly property var input: ["15", "-50", "-60", "95", "50", "0"]
 
 
     Repeater {
@@ -24,7 +25,7 @@ GridLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredHeight: heigth
-            //text: index
+
         }
         Component.onCompleted: {
             for (let i = 0; i < _repeater1.count; i++)
@@ -42,24 +43,21 @@ GridLayout {
         Layout.preferredHeight: heigth
         Layout.row: 2
         Layout.columnSpan: 3
+        enabled: isValidAllInput
         onClicked: {
-            if(isActive)
+            let vector = []
+            for (let i = 0; i < _repeater1.count; i++)
             {
-                let vector = []
-                for (let i = 0; i < _repeater1.count; i++)
-                {
-                    vector.push(parseInt(_repeater1.itemAt(i).text))
-                }
-
-                let result = []
-                result = appEngine.calculate(vector)
-
-                _repeater2.itemAt(0).text = "X = " + result[0]
-                _repeater2.itemAt(1).text = "Y = " + result[1]
-                _repeater2.itemAt(2).text = "Z = " + result[2]
+                vector.push(parseInt(_repeater1.itemAt(i).text))
             }
-        }
 
+            let result = []
+            result = appEngine.calculate(vector)
+
+            _repeater2.itemAt(0).text = "X = " + result[0]
+            _repeater2.itemAt(1).text = "Y = " + result[1]
+            _repeater2.itemAt(2).text = "Z = " + result[2]
+        }
     }
 
     Repeater {

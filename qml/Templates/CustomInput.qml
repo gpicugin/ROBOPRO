@@ -10,8 +10,7 @@ Rectangle {
 
     property alias text: _input.text
     property alias textColor: _input.color
-    property bool isActive: false
-    signal sendValidity(bool isValid)
+    property alias input: _input
 
     TextInput {
         anchors.centerIn: parent
@@ -21,7 +20,8 @@ Rectangle {
         color: Style.textColor
         font.pointSize: _customInput.width * 0.05
 
-        onActiveFocusChanged: {
+        onActiveFocusChanged:
+        {
             if(focus)
                 _input.clear()
         }
@@ -33,23 +33,16 @@ Rectangle {
                 _customInput.color = Style.errorColor
                 _input.clear()
                 _input.text = "#ivalid_input"
-            } else
+            }
+            else
             {
                 _customInput.color = Style.controlsColor
             }
-            _customInput.sendValidity(isValidNumber(input))
         }
 
         function isValidNumber(input)
         {
             return /^[+-]?\d+$/.test(input);
-        }
-
-        Component.onCompleted: {
-            _customInput.sendValidity.connect(_myButton.onSendValidity)
-            _customInput.sendValidity(isValidNumber(input))
-        }
-
-
+        }        
     }
 }

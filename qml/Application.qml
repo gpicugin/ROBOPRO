@@ -16,6 +16,5 @@ Window {
             fill: parent
             margins: _root.width * 0.1
         }
-
     }
 }
