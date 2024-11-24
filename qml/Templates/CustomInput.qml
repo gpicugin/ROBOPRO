@@ -12,7 +12,10 @@ Rectangle {
     property alias textColor: _input.color
     property alias input: _input
 
-    TextInput {
+    signal validatedInput(bool flag)
+
+    TextInput
+    {
         anchors.centerIn: parent
         id: _input
         horizontalAlignment: Text.AlignHCenter
@@ -28,7 +31,8 @@ Rectangle {
 
         onEditingFinished:
         {
-            if (!isValidNumber(_input.text))
+            let isValid = isValidNumber(_input.text)
+            if (!isValid)
             {
                 _customInput.color = Style.errorColor
                 _input.clear()
@@ -38,6 +42,7 @@ Rectangle {
             {
                 _customInput.color = Style.controlsColor
             }
+            validatedInput(isValid)
         }
 
         function isValidNumber(input)

@@ -5,32 +5,38 @@ import  "../qml/Templates"
 import  "../qml/StyleSettings"
 
 GridLayout {
-    id: _greed
+    id: _grid
     columns: 3
     rows: 4
-    property double margins: _greed.width * 0.01
-    property double inputWidth: _greed.width * 0.3
-    property double heigth: _greed.height * 0.15
+    property double margins: _grid.width * 0.01
+    property double inputWidth: _grid.width * 0.3
+    property double heigth: _grid.height * 0.15
     property bool isValidAllInput: true
 
     readonly property var arr: ["X", "Y", "Z"]
-    readonly property var input: ["15", "-50", "-60", "95", "50", "0"]
-
+    readonly property var validArr: [false, false, false, false, false, false]
 
     Repeater {
         id: _repeater1
         model: 6
+        signal validatedRepeater()
+
         CustomInput {
+            id: customInputItem
             Layout.margins: margins
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredHeight: heigth
+            text: "theta_" + index
 
-        }
-        Component.onCompleted: {
-            for (let i = 0; i < _repeater1.count; i++)
+            Connections
             {
-                _repeater1.itemAt(i).text = input[i]
+                target: customInputItem
+                function onValidatedInput(isValid)
+                {
+                    validArr[index] = isValid
+                    _repeater1.validatedRepeater()
+                }
             }
         }
     }
@@ -44,7 +50,8 @@ GridLayout {
         Layout.row: 2
         Layout.columnSpan: 3
         enabled: isValidAllInput
-        onClicked: {
+        onClicked:
+        {
             let vector = []
             for (let i = 0; i < _repeater1.count; i++)
             {
@@ -58,17 +65,51 @@ GridLayout {
             _repeater2.itemAt(1).text = "Y = " + result[1]
             _repeater2.itemAt(2).text = "Z = " + result[2]
         }
+
+        Connections
+        {
+            target: _repeater1
+            function onValidatedRepeater()
+            {
+                validateAll()
+            }
+        }
+
+        Component.onCompleted: {
+            validateAll()
+        }
+
+        function validateAll()
+        {
+            let result = true
+            let counter = 0
+            for(let i = 0; i < _repeater1.count; i++)
+            {
+                if(!validArr[i]) {
+                    result = false
+                    break
+                }
+                else
+                    counter = counter + 1
+            }
+            if(counter === _repeater1.count)
+                result = true
+            isValidAllInput = result
+            console.log(validArr)
+        }
     }
 
     Repeater {
         id: _repeater2
         model: 3
-        CustomInput {
+        CustomInput
+        {
             Layout.margins: margins
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredHeight: heigth
-            text: _greed.arr[index]
+            text: _grid.arr[index]
         }
     }
+
 }

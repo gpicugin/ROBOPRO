@@ -1,7 +1,7 @@
 #include "AppEngine.h"
 #include <QDebug>
 #include <math.h>
-#define DEBUG
+//#define DEBUG
 AppEngine::AppEngine(QObject *parent)
     : QObject{parent},
     a_arr{0, -0.8, -0.59, 0, 0, 0},
