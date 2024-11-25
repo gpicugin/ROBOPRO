@@ -1,7 +1,7 @@
 #ifndef APPENGINE_H
 #define APPENGINE_H
 #include <QObject>
-#include <Libs/eigen-3.4.0/Eigen/Dense>
+#include <Libs/EigenLib/Eigen/Dense>
 
 class AppEngine : public QObject
 {

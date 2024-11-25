@@ -6,7 +6,7 @@ CONFIG += C++17
 SOURCES += \
         src/AppEngine.cpp \
         src/main.cpp \
-        Libs/eigen-3.4.0/Eigen/Dense
+        Libs/EigenLib/Eigen/Dense
 
 RESOURCES += \
     qml.qrc
